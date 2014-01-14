@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wurfl>
+<version>
+    <ver>2.3, db.scientiamobile.com - 2011-11-17 17:59:23</ver>
+    <last_updated>Thu Nov 17 18:01:04 -0500 2011</last_updated>
+    <official_url>http://wurfl.sourceforge.net/</official_url>
+	    <maintainers>
+	        <maintainer name="Luca Passani" email="luca at scientiamobile dot com" home_page="http://www.scientiamobile.com"/>
+	        <maintainer name="Steve Kamerman" email="steve at scientiamobile dot com" home_page="http://www.scientiamobile.com"/>
+	    </maintainers>
+	    <authors>
+	      <author name="Luca Passani" email="luca at scientiamobile dot com" home_page="http://www.scientiamobile.com"/>
+	    </authors>   
+
+    <statement>
+     <![CDATA[ 
+		Copyright (C) 2011 ScientiaMobile, Inc., Reston, VA, USA
+
+	Dear User,
+
+	The WURFL file contains information about the capabilities of mobile devices
+	and the browsers running on them. This information is collected to allow
+	developers to build mobile websites and mobile services that adapt themselves
+	to the actual features of the device and browser. 
+
+	This file is brought to you by ScientiaMobile, Inc. (http://www.scientiamobile.com),
+	a US Company that offers commercial licensing, APIs, tools and support for WURFL.
+
+	The WURFL file is the Copyright of ScientiaMobile. 
+	Permission is granted to use one copy of the WURFL file only under the
+	circumstances and conditions specified here below. All rights are otherwise
+	reserved.
+
+	You are authorized to use the WURFL file AS IS, without modification and solely in
+	connection with one of the standard WURFL APIs, starting from version 1.3, 
+	released and supported by ScientiaMobile and available at
+	the official WURFL website at http://wurfl.sourceforge.net.
+	
+	You are not authorized to create a derivative work of or otherwise modify
+	this WURFL file, and you are further not authorized to use, copy, display,
+	or distribute, in each case, any derivative work of this WURFL file,
+	whether created by you or someone else.
+	
+	Organizations that intend to use this file or the data contained in it commercially
+	or under different licensing terms should contact ScientiaMobile 
+	(http://www.scientiamobile.com) to learn about licensing options for WURFL.
+	
+        This file is distributed WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE or NON-INFRINGEMENT.
+	Use of the WURFL file is permitted only under express acceptance of the
+	terms above. Therefore, by downloading, copying or otherwise making use of
+	the file you accept to be bound by said terms.
+	
+	Please post any suggested modifications for future releases and/or comments 
+	to the file on the WMLProgramming mailing list on Yahoo Groups:
+
+	http://tech.groups.yahoo.com/group/wmlprogramming/
+
+	Alternatively, you can email your suggested modifications and comments
+	to the ScientiaMobile team at:
+
+	wurfldb@scientiamobile.com.
+
+	ScientiaMobile reserves the right to include third-party contributions with
+	or without modifications at its sole discretion.
+
+	Thank you
+
+	Luca Passani, CTO, ScientiaMobile, Inc.
+]]></statement>
+
+  </version>
+  
+  
+<devices>
+  <device id="generic" user_agent="" fall_back="root">
+    <group id="product_info">
+      <capability name="mobile_browser" value=""/>
+      <capability name="nokia_feature_pack" value="0"/>
+      <capability name="device_os" value=""/>
+      <capability name="nokia_series" value="0"/>
+      <capability name="has_qwerty_keyboard" value="false"/>
+      <capability name="pointing_method" value=""/>
+      <capability name="mobile_browser_version" value=""/>
+      <capability name="is_tablet" value="false"/>
+      <capability name="nokia_edition" value="0"/>
+	  
+	</group>
+</device>
+</devices>	
+</wurfl>
