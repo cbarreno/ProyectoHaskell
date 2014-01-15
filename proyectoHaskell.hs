@@ -156,26 +156,59 @@ parse1 (x:xs) a listanombres= do
 									let var=compruebaEtiqueta0 (words( myShow (head (x:xs))))
 									case var of 
 												0 -> (0,Hoja)
-												2 -> do 
-										-- let n= insertarArbol primeral a
-										-- let lista=getListaArboles n
-									   -- let arbol=head lista
+												2 -> do
 														let dupla=obtenerNombre(words( myShow (head(words(head (x:xs)))))) 
 														let nombreEtiqueta=snd dupla
 														let list=listanombres ++ [nombreEtiqueta]
-														let arbol= Nodo [nombreEtiqueta] [Hoja]
-														let tupla =parse1 (xs) arbol list
-														let n= insertarNodoenArbol (snd tupla) a
-														(fst(tupla),n)
-										
+														--let otr0="p"--nombreEtiqueta
+														case nombreEtiqueta of 
+																				"devices" ->	do
+																									   let arbol= Nodo [nombreEtiqueta] [Hoja]
+																									   let tupla =parse1 (xs) arbol list
+																									   let n= insertarNodoenArbol (snd tupla) a
+																									   (fst(tupla),n)
+																				"device" ->	do
+																									   let id=obtenerIdD (words( myShow (unwords(tail(words(head (x:xs))))))) 
+																									   let user=obtenerUserAgentG (fst id)
+																									   let fallback=obtenerFallBackD (fst user)
+																									   let arbol= Nodo [nombreEtiqueta,snd id,snd user,snd fallback] [Hoja]
+																									   let tupla =parse1 (xs) arbol list
+																									   let n= insertarNodoenArbol (snd tupla) a
+																									   (fst(tupla),n)					   
+																				"group" ->	do
+																									   let id=obtenerIdG (words( myShow (unwords(tail(words(head (x:xs))))))) 
+																									   let arbol= Nodo [nombreEtiqueta,snd id] [Hoja]
+																									   let tupla =parse1 (xs) arbol list
+																									   let n= insertarNodoenArbol (snd tupla) a
+																									   (fst(tupla),n)
+																				"version" ->	do
+																									   let sinversion=devuelveSinVersion (xs)
+																									   let tupla =parse1 (sinversion) a list
+																									   (fst(tupla),snd (tupla))					   
+																			    					   				   
+																				otr0 ->	do
+																									   let tupla =parse1 (xs) a list
+																									   (fst(tupla),snd (tupla))
+																									
+																									   
+																				
 												1 -> do 
-														let n= insertarArbol [x] a
-										-- let lista=getListaArboles n
-										-- let arbol=head lista
-														if lon==1
-															then (1,n)
-															else do 
-																parse1 (xs) n listanombres
+														let dupla=obtenerNombre(words( myShow (head(words(head (x:xs))))))
+														let etiquet=snd (dupla)
+														case etiquet of 
+																		"capability" ->	  do
+																							let name=obtenerNombreC  (words( myShow (unwords(tail(words(head (x:xs)))))))
+																							let value=obtenerValueC (fst name)
+																							let n= insertarArbol [snd dupla ,snd name,snd value] a
+																							if lon==1
+																								then (1,n)
+																								else do 
+																									parse1 (xs) n listanombres
+																		otr0 -> do
+																						if lon==1
+																								then (1,a)
+																								else do 
+																									parse1 (xs) a listanombres
 												3 -> do
 														let lonl=(length listanombres)==1
 														let upla=obtenerNombre(words( myShow (head(words(head (x:xs)))))) 
@@ -211,6 +244,8 @@ obtenerNombre (x:xs)
 obtenerDatos []=([],"")								
 obtenerDatos(x:xs)
 	 | x=="="&&head(xs)=="\""&& removeNon (head(tail(xs)))==["1"] = (fst (obtenerDatos(tail(tail(xs)))) ,head(tail (xs)) ++ snd(obtenerDatos(tail(tail(xs)))))
+	 | x=="="&&head(xs)=="\""&& head(tail(xs))=="\"" = (tail(tail(xs)),"")
+	 | x=="="&&head(xs)=="\""&& isNum (head(tail(xs)))==["1"] = (fst (obtenerDatos(tail(tail(xs)))) ,head(tail (xs)) ++ snd(obtenerDatos(tail(tail(xs)))))
 	 | x=="\"" =((xs),"")
 	 | otherwise = (fst(obtenerDatos(xs)) ,x ++ snd (obtenerDatos(xs)))	
 obtenerNombreC []=([],"")								
@@ -246,12 +281,20 @@ compruebaEtiquetaVersion (x:xs)
 	|(x:xs)==[] = 0
 	|otherwise = 2
 	
-								
+devuelveSinVersion (x:xs)	
+	| snd(obtenerNombre (words( myShow (head(words(head (x:xs)))))))=="version" = (x:xs)
+	| otherwise = devuelveSinVersion (xs)	
 removeNon st = do
 				let ca=[ c | c <- st, c `elem` ['a'..'z']]		
 				if null ca
 					then return  "0"
 					else do return  "1"
+					
+isNum st = do
+				let ca=[ c | c <- st, c `elem` ['0'..'9']]		
+				if null ca
+					then return  "0"
+					else do return  "1"					
 hoja :: [a] -> Arbol a 
 hoja x = Nodo x []
 
@@ -262,13 +305,13 @@ pparsexml e= do
 				contents <- readFile e 
 				let ao = quitaEspacio(lines contents)
 				let aoi = words(myShow (contents))
-				print aoi
+				print ao
 				let x=parse0 ao
 				let respuesta=(fst x)
 				case respuesta of 
-									1 -> return "El archivo es correcto"
-									2 -> return"El archivo es incorrecto"
-									0 -> return "no hay archivo"
+									1 -> return x--"El archivo es correcto"
+									2 -> return x--"El archivo es incorrecto"
+									0 -> return x--"no hay archivo"
 					
-main = do pparsexml "jueves.xml"
+main = do pparsexml "martes.xml"
 
